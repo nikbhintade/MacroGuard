@@ -3,7 +3,7 @@ pragma solidity ^0.8.25;
 
 import {IJsonApi} from "@flarenetwork/flare-periphery-contracts/coston/IJsonApi.sol";
 
-interface IInsurance {
+interface IMacroGuard {
     enum Status {
         Created,
         Claimable,
@@ -22,7 +22,7 @@ interface IInsurance {
         uint256 currentSupply;//
         uint256 totalSupply;//
         string indicator;//
-        bool isIncrease;//
+        bool isHigher;//
     }
 
     function createPolicy(

@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/MacroGuard.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> MacroGuard.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.15% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>50/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.48% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>38/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">72.73% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>57/59</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.25;
+&nbsp;
+import {IMacroGuard} from "./IMacroGuard.sol";
+&nbsp;
+import {IJsonApi} from "@flarenetwork/flare-periphery-contracts/coston/IJsonApi.sol";
+import {ContractRegistry} from "@flarenetwork/flare-periphery-contracts/coston/ContractRegistry.sol";
+&nbsp;
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {ERC1155} from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+&nbsp;
+struct DataTransportObject {
+    string indicator;
+    uint256 timestamp;
+    uint256 value;
+}
+&nbsp;
+contract MacroGuard is IMacroGuard, ERC1155 {
+    event PolicyCreated(uint256 id, address provider);
+    event PolicyPurchased(uint256 id, address buyer, uint256 premium);
+    event PolicyStatusUpdated(uint256 policyId, Status newStatus);
+&nbsp;
+    uint256 s_currentPolicyId;
+    IERC20 s_token;
+    mapping(string =&gt; uint256) indicatorsValues;
+    mapping(string =&gt; uint256[]) indicatorToPolicy;
+    mapping(uint256 =&gt; Policy) policies;
+&nbsp;
+    constructor(address token, string memory _uri) ERC1155(_uri) {
+        s_token = IERC20(token);
+    }
+&nbsp;
+    function createPolicy(
+        uint256 premium,
+        uint256 noOfPolicies,
+        uint256 coverage,
+        uint256 strikePrice,
+        uint256 startDate,
+        uint256 period,
+        bool isHigher,
+        string calldata indicator
+    ) external returns (uint256) {
+        require(bytes(indicator).length &gt; 0, "indicator is empty");
+        require(indicatorsValues[indicator] != 0, "indicator not available");
+&nbsp;
+        require(premium &gt; 0, "premium must be &gt; 0");
+        require(noOfPolicies &gt; 0, "noOfPolicies must be &gt; 0");
+        require(coverage &gt; 0, "coverage must be &gt; 0");
+        require(strikePrice &gt; 0, "strikePrice must be &gt; 0");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(startDate &gt;= 0, "startDate must be &gt;= 0");
+        require(period &gt; 0, "period must be &gt; 0");
+&nbsp;
+        uint256 totalCoverage = noOfPolicies * coverage;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(s_token.transferFrom(msg.sender, address(this), totalCoverage), "Token transfer failed");
+&nbsp;
+        uint256 startTimestamp = block.timestamp + startDate;
+&nbsp;
+        policies[s_currentPolicyId] = Policy({
+            id: s_currentPolicyId,
+            provider: msg.sender,
+            premium: premium,
+            coverage: coverage,
+            status: Status.Created,
+            strikePrice: strikePrice,
+            startDate: startTimestamp,
+            endDate: startTimestamp + period,
+            currentSupply: 0,
+            totalSupply: noOfPolicies,
+            indicator: indicator,
+            isHigher: isHigher
+        });
+&nbsp;
+        indicatorToPolicy[indicator].push(s_currentPolicyId);
+&nbsp;
+        emit PolicyCreated(s_currentPolicyId, msg.sender);
+&nbsp;
+        return s_currentPolicyId++;
+    }
+&nbsp;
+    function buyPolicy(uint256 id) external {
+        Policy storage policy = policies[id];
+        require(policy.totalSupply &gt; 0, "Policy does not exist");
+        require(policy.currentSupply &lt; policy.totalSupply, "Exceeds total supply");
+        require(policy.startDate &gt; block.timestamp, "Can't buy this policy yet");
+&nbsp;
+        bool success = s_token.transferFrom(msg.sender, policy.provider, policy.premium);
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(success, "Premium transfer failed");
+&nbsp;
+        policy.currentSupply += 1; // Now this change persists
+&nbsp;
+        _mint(msg.sender, id, 1, "");
+&nbsp;
+        emit PolicyPurchased(id, msg.sender, policy.premium);
+    }
+&nbsp;
+    function redeemPolicy(uint256 id) external {
+        // get policy
+        Policy memory policy = policies[id];
+&nbsp;
+        // check if msg.sender owns a policy
+        require(balanceOf(msg.sender, id) &gt; 0, "don't have any policy");
+&nbsp;
+        // check if policy is claimable
+        require(policy.status == Status.Claimable, "only claimable policies can be redeemed");
+&nbsp;
+        // burn the token
+        _burn(msg.sender, id, 1);
+&nbsp;
+        // send the coverage amount
+        s_token.transfer(msg.sender, policy.coverage);
+    }
+&nbsp;
+    function expirePolicy(uint256 id) external {
+        // Get policy
+        Policy storage policy = policies[id];
+&nbsp;
+        // Check if the sender is the provider
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(msg.sender == policy.provider, "only provider can access this");
+&nbsp;
+        // Check if the policy's end date has passed
+        if (policy.endDate &lt; block.timestamp) {
+            // If the policy is claimable, revert
+            if (policy.status == Status.Claimable) {
+                revert("can't expire a claimable policy");
+            } else {
+                // Update the policy status to expired
+                policy.status = Status.Voided;
+                emit PolicyStatusUpdated(id, Status.Voided);
+&nbsp;
+                // Transfer the appropriate amount to the provider
+                s_token.transfer(policy.provider, policy.totalSupply * policy.coverage);
+            }
+        } else {
+            // If the policy is not expired yet, calculate the amount to return
+            uint256 unboughtPolicies = policy.totalSupply - policy.currentSupply;
+            uint256 amountToReturn = policy.coverage * unboughtPolicies;
+&nbsp;
+            // Ensure the provider gets the right amount for unbought policies
+            s_token.transfer(policy.provider, amountToReturn);
+        }
+    }
+&nbsp;
+    function updateData(IJsonApi.Proof calldata data) external {
+        DataTransportObject memory dto = abi.decode(data.data.responseBody.abi_encoded_data, (DataTransportObject));
+&nbsp;
+        // Update the indicator value
+        indicatorsValues[dto.indicator] = dto.value;
+&nbsp;
+        uint256[] memory indicatorPolicies = indicatorToPolicy[dto.indicator];
+        uint256 arrLength = indicatorPolicies.length;
+&nbsp;
+        for (uint256 i = 0; i &lt; arrLength; i++) {
+            uint256 policyId = indicatorPolicies[i];
+            Policy storage policy = policies[policyId]; // Access the policy via its ID
+&nbsp;
+            if (policy.isHigher) {
+                if (dto.value &gt;= policy.strikePrice) {
+                    policy.status = Status.Claimable;
+                    emit PolicyStatusUpdated(policyId, Status.Claimable);
+                }
+            } else {
+                if (dto.value &lt;= policy.strikePrice) {
+                    policy.status = Status.Claimable;
+                    emit PolicyStatusUpdated(policyId, Status.Claimable);
+                }
+            }
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function isJsonApiProofValid(IJsonApi.Proof calldata _proof) private view returns (bool) {</span>
+        // Inline the check for now until we have an official contract deployed
+<span class="cstat-no" title="statement not covered" >        return ContractRegistry.auxiliaryGetIJsonApiVerification().verifyJsonApi(_proof);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function abiSignatureHack(DataTransportObject calldata dto) public pure {}</span>
+&nbsp;
+    // TODO: create on-chain dynamic NFT with these details.
+&nbsp;
+    function getPolicy(uint256 id) external view returns (Policy memory) {
+        return policies[id];
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function getCurrentPolicyId() external view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        return s_currentPolicyId;</span>
+    }
+&nbsp;
+    function getIndicatorValue(string calldata indicator) external view returns (uint256) {
+        return indicatorsValues[indicator];
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 24 2025 15:20:55 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

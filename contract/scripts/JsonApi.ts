@@ -4,7 +4,7 @@ import {
   prepareAttestationRequestBase,
   submitAttestationRequest,
   retrieveDataAndProofBase,
-} from "./fdcExample/Base";
+} from "./Base";
 
 const StarWarsCharacterList = artifacts.require("StarWarsCharacterList");
 

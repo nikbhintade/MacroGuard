@@ -1,7 +1,11 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-web3";
+import "hardhat-tracer";
+
 require("@nomiclabs/hardhat-truffle5");
+require("@nomicfoundation/hardhat-chai-matchers");
+import "solidity-coverage";
 
 // import { vars } from "hardhat/config";
 const { vars } = require("hardhat/config");
@@ -94,8 +98,7 @@ const config: HardhatUserConfig = {
         chainId: 16,
         urls: {
           // faucet: https://faucet.towolabs.com/
-          apiURL:
-            "https://coston-explorer.flare.network/api" +
+          apiURL: "https://coston-explorer.flare.network/api" +
             (FLARE_EXPLORER_API_KEY
               ? `?x-apikey=${FLARE_EXPLORER_API_KEY}`
               : ""), // Must not have / endpoint
@@ -107,8 +110,7 @@ const config: HardhatUserConfig = {
         chainId: 114,
         urls: {
           // faucet: https://coston2-faucet.towolabs.com/
-          apiURL:
-            "https://coston2-explorer.flare.network/api" +
+          apiURL: "https://coston2-explorer.flare.network/api" +
             (FLARE_EXPLORER_API_KEY
               ? `?x-apikey=${FLARE_EXPLORER_API_KEY}`
               : ""), // Must not have / endpoint
@@ -119,8 +121,7 @@ const config: HardhatUserConfig = {
         network: "songbird",
         chainId: 19,
         urls: {
-          apiURL:
-            "https://songbird-explorer.flare.network/api" +
+          apiURL: "https://songbird-explorer.flare.network/api" +
             (FLARE_EXPLORER_API_KEY
               ? `?x-apikey=${FLARE_EXPLORER_API_KEY}`
               : ""), // Must not have / endpoint
@@ -131,8 +132,7 @@ const config: HardhatUserConfig = {
         network: "flare",
         chainId: 14,
         urls: {
-          apiURL:
-            "https://flare-explorer.flare.network/api" +
+          apiURL: "https://flare-explorer.flare.network/api" +
             (FLARE_EXPLORER_API_KEY
               ? `?x-apikey=${FLARE_EXPLORER_API_KEY}`
               : ""), // Must not have / endpoint
@@ -148,7 +148,7 @@ const config: HardhatUserConfig = {
     artifacts: "./artifacts",
   },
   typechain: {
-    target: "truffle-v5",
+    target: "ethers-v6",
   },
 };
 
