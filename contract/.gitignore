@@ -1,14 +1,14 @@
-# Compiler files
-cache/
-out/
+# vscode
+.vscode
 
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
+# hardhat
+artifacts
+cache
+deployments
+node_modules
+typechain-types
 
-# Docs
-docs/
-
-# Dotenv file
 .env
+
+
+.DS_Store
