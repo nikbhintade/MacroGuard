@@ -12,16 +12,33 @@ const {
 } = process.env;
 
 async function deployAndVerifyContract() {
-    const tokenAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"; // Replace with actual token address
+    const tokenName = "Test Token";
+    const tokenSymbol = "TT";
+
+    const TestToken = await ethers.getContractFactory("TestToken");
+    const testToken = await TestToken.deploy(tokenName, tokenSymbol);
+    await testToken.waitForDeployment();
+
+    const tokenAddress = await testToken.getAddress();
+
+    console.log(`Test token deployed to: ${tokenAddress}`);
+
+    await run("verify:verify", {
+        address: tokenAddress,
+        constructorArguments: [tokenName, tokenAddress],
+    });
+
     const uri = ""; // Replace with your ERC1155 metadata URI
+    // NOTICE: There is no need for URI as these ERC1155 token will have
+    // dynamic images with SVG.
 
-    const Insurance = await ethers.getContractFactory("Insurance");
-    const insurance = await Insurance.deploy(tokenAddress, uri);
-    await insurance.waitForDeployment();
+    const MacroGuard = await ethers.getContractFactory("MacroGuard");
+    const macroGuard = await MacroGuard.deploy(tokenAddress, uri);
+    await macroGuard.waitForDeployment();
 
-    const contractAddress = await insurance.getAddress();
+    const contractAddress = await macroGuard.getAddress();
 
-    console.log(`Insurance deployed to: ${contractAddress}`);
+    console.log(`MacroGuard deployed to: ${contractAddress}`);
 
     await run("verify:verify", {
         address: contractAddress,
