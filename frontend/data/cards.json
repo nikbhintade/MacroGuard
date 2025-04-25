@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Buy for 1 USDT",
+    "buttonLink": "/card/1"
+  },
+  {
+    "id": 2,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Buy for 2 USDT",
+    "buttonLink": "/card/2"
+  },
+  {
+    "id": 3,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Buy for 3 USDT",
+    "buttonLink": "/card/1"
+  },
+  {
+    "id": 4,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Buy for 4 USDT",
+    "buttonLink": "/card/2"
+  }
+]
