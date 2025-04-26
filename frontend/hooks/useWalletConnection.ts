@@ -13,19 +13,56 @@ export function useWalletConnection() {
   const [account, setAccount] = useState<Address | undefined>();
   const [client, setClient] = useState<WalletClient | undefined>();
 
+  const isConnected = Boolean(account && client);
+
   useEffect(() => {
-    const saved = localStorage.getItem("walletAccount");
-    if (saved && saved.startsWith("0x") && saved.length === 42) {
-      setAccount(saved as Address);
-      const ethereum = (window as any).ethereum;
-      if (ethereum) {
+    const ethereum = (window as any).ethereum;
+    if (!ethereum) return;
+
+    const checkConnection = async () => {
+      try {
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+        if (accounts.length > 0) {
+          const saved = accounts[0];
+          if (saved.startsWith("0x") && saved.length === 42) {
+            setAccount(saved as Address);
+            const walletClient = createWalletClient({
+              chain: flareTestnet,
+              transport: custom(ethereum),
+            });
+            setClient(walletClient);
+            localStorage.setItem("walletAccount", saved);
+          }
+        } else {
+          disconnectWallet();
+        }
+      } catch (err) {
+        console.error("Error checking wallet connection:", err);
+      }
+    };
+
+    checkConnection();
+
+    // Listen for account changes or disconnection
+    const handleAccountsChanged = (accounts: string[]) => {
+      if (accounts.length === 0) {
+        disconnectWallet();
+      } else {
+        setAccount(accounts[0] as Address);
         const walletClient = createWalletClient({
           chain: flareTestnet,
           transport: custom(ethereum),
         });
         setClient(walletClient);
+        localStorage.setItem("walletAccount", accounts[0]);
       }
-    }
+    };
+
+    ethereum.on("accountsChanged", handleAccountsChanged);
+
+    return () => {
+      ethereum.removeListener("accountsChanged", handleAccountsChanged);
+    };
   }, []);
 
   const connectWallet = async () => {
@@ -76,19 +113,14 @@ export function useWalletConnection() {
       const walletClient = createWalletClient({
         chain: flareTestnet,
         transport: custom(ethereum),
-      })!;
-
-      if (!walletClient) {
-        throw new Error("Wallet client is not initialized.");
-      }
+      });
 
       setAccount(connectedAccount);
       setClient(walletClient);
       localStorage.setItem("walletAccount", connectedAccount);
     } catch (err) {
       console.error("Wallet connection failed:", err);
-      setAccount(undefined);
-      setClient(undefined);
+      disconnectWallet();
     }
   };
 
@@ -99,8 +131,9 @@ export function useWalletConnection() {
   };
 
   return {
-    account, // only defined if valid 0x address
-    client, // only defined if account is defined
+    account,
+    client,
+    isConnected,
     connectWallet,
     disconnectWallet,
   };

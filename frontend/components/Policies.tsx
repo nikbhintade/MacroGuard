@@ -12,11 +12,11 @@ import { createPublicClient, formatEther, http, parseUnits } from "viem";
 import { flareTestnet } from "viem/chains";
 import contractJson from "@/abi/macroguard.json";
 import tokenJson from "@/abi/token.json";
-import { useWalletConnection } from "@/hooks/useWalletConnection"; // Assuming you have a hook for wallet connection
+import { useWalletConnection } from "@/hooks/useWalletConnection";
 
 const contractAddress = "0xec4774B4F26cD511b8545348D4Bb00a1Ad9b44B9";
 const contractAbi = contractJson.abi;
-const tokenAddress = "0xeEf81df5961036265a336431232506824DcA9488"; // Add the TestToken contract address here
+const tokenAddress = "0xeEf81df5961036265a336431232506824DcA9488";
 const tokenAbi = tokenJson.abi;
 
 const publicClient = createPublicClient({
