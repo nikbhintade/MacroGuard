@@ -11,12 +11,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { flareTestnet } from "viem/chains";
+import contractJson from "@/abi/macroguard.json";
+import { useWalletConnection } from "@/hooks/useWalletConnection";
+import { parseUnits } from "viem";
+
+const contractAddress = "0xec4774B4F26cD511b8545348D4Bb00a1Ad9b44B9";
+const contractAbi = contractJson.abi;
 
 export default function CreatePolicy() {
+  const { account: userAddress, client } = useWalletConnection();
+
   const [formData, setFormData] = useState({
     indicator: "",
-    trigger: "",
     increase: "",
+    strikePrice: "",
     coverage: "",
     premium: "",
     numberOfPolicies: "",
@@ -33,8 +42,50 @@ export default function CreatePolicy() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", formData);
+  const handleSubmit = async () => {
+    const {
+      premium,
+      numberOfPolicies,
+      coverage,
+      strikePrice,
+      startDate,
+      endDate,
+      indicator,
+      increase,
+    } = formData;
+
+    const startDateUnix = Math.floor(new Date(startDate).getTime() / 1000);
+    const endDateUnix = Math.floor(new Date(endDate).getTime() / 1000);
+    const period = endDateUnix - startDateUnix;
+    const isHigher = increase === "Higher";
+
+    try {
+      if (!client || !userAddress) {
+        throw new Error("Wallet client or user address not found.");
+      }
+
+      await client.writeContract({
+        account: userAddress,
+        address: contractAddress, // Replace with actual address
+        abi: contractAbi, // Replace with actual ABI
+        functionName: "createPolicy",
+        chain: flareTestnet, // Replace with actual chain
+        args: [
+          parseUnits(premium, 18),
+          BigInt(numberOfPolicies),
+          parseUnits(coverage, 18),
+          BigInt(Number(strikePrice) * 1_000_000),
+          BigInt(startDateUnix),
+          BigInt(period),
+          isHigher,
+          indicator,
+        ],
+      });
+
+      console.log("Policy Created.");
+    } catch (err) {
+      console.error("Error creating policy:", err);
+    }
   };
 
   return (
@@ -51,30 +102,25 @@ export default function CreatePolicy() {
             <SelectValue placeholder="Select Indicator" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="Indicator A">Indicator A</SelectItem>
-            <SelectItem value="Indicator B">Indicator B</SelectItem>
+            <SelectItem value="GDP">GDP</SelectItem>
+            <SelectItem value="CPI">CPI</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="trigger">Trigger</Label>
-        <Select
-          onValueChange={(value) => handleSelectChange("trigger", value)}
-          value={formData.trigger}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Trigger" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Trigger X">Trigger X</SelectItem>
-            <SelectItem value="Trigger Y">Trigger Y</SelectItem>
-          </SelectContent>
-        </Select>
+        <Label htmlFor="strikePrice">Strike Price</Label>
+        <Input
+          id="strikePrice"
+          name="strikePrice"
+          type="number"
+          value={formData.strikePrice}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="increase">Increase</Label>
+        <Label htmlFor="increase">Higher/Lower</Label>
         <Select
           onValueChange={(value) => handleSelectChange("increase", value)}
           value={formData.increase}
@@ -83,8 +129,8 @@ export default function CreatePolicy() {
             <SelectValue placeholder="Select Increase" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="Low">Low</SelectItem>
-            <SelectItem value="High">High</SelectItem>
+            <SelectItem value="Lower">Lower</SelectItem>
+            <SelectItem value="Higher">Higher</SelectItem>
           </SelectContent>
         </Select>
       </div>

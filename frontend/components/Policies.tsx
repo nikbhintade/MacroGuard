@@ -57,7 +57,7 @@ export default function Policies() {
         const idNum = Number(currentId);
 
         const results = await Promise.all(
-          Array.from({ length: idNum - 1 }, (_, i) =>
+          Array.from({ length: idNum }, (_, i) =>
             publicClient.readContract({
               address: contractAddress,
               abi: contractAbi,
