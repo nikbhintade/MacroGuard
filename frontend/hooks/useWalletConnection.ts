@@ -73,6 +73,20 @@ export function useWalletConnection() {
     }
 
     try {
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      const connectedAccount = accounts[0] as Address;
+      const walletClient = createWalletClient({
+        chain: flareTestnet,
+        transport: custom(ethereum),
+      });
+
+      setAccount(connectedAccount);
+      setClient(walletClient);
+      localStorage.setItem("walletAccount", connectedAccount);
+
       const currentChainId = await ethereum.request({ method: "eth_chainId" });
 
       if (parseInt(currentChainId, 16) !== flareTestnet.id) {
@@ -104,20 +118,6 @@ export function useWalletConnection() {
           }
         }
       }
-
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      const connectedAccount = accounts[0] as Address;
-      const walletClient = createWalletClient({
-        chain: flareTestnet,
-        transport: custom(ethereum),
-      });
-
-      setAccount(connectedAccount);
-      setClient(walletClient);
-      localStorage.setItem("walletAccount", connectedAccount);
     } catch (err) {
       console.error("Wallet connection failed:", err);
       disconnectWallet();

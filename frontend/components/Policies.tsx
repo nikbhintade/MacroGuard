@@ -153,44 +153,48 @@ export default function Policies() {
 
   return (
     <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4 py-6">
-      {policies.map((policy, index) => (
-        <Card
-          key={index}
-          className="bg-black border border-gray-700 text-white flex flex-col overflow-hidden p-0"
-        >
-          <CardContent className="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <CardTitle className="text-xl mb-1">
-                {policy.indicator} @ {Number(policy.strikePrice) / 1_000_000}{" "}
-                {policy.isHigher ? "or Higher" : "or Lower"}
-              </CardTitle>
+      {policies
+        .slice()
+        .reverse()
+        .map((policy, index) => (
+          <Card
+            key={index}
+            className="bg-black border border-gray-700 text-white flex flex-col overflow-hidden p-0"
+          >
+            <CardContent className="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <CardTitle className="text-xl mb-1">
+                  {policy.indicator} @ {Number(policy.strikePrice) / 1_000_000}{" "}
+                  {policy.isHigher ? "or Higher" : "or Lower"}
+                </CardTitle>
 
-              <CardDescription className="text-sm text-gray-300 mb-1">
-                By {policy.provider.slice(0, 5)}....{policy.provider.slice(-5)}
-              </CardDescription>
+                <CardDescription className="text-sm text-gray-300 mb-1">
+                  By {policy.provider.slice(0, 5)}....
+                  {policy.provider.slice(-5)}
+                </CardDescription>
 
-              <p className="text-gray-300 mb-3">
-                {Number(policy.currentSupply)} / {Number(policy.totalSupply)}
-              </p>
-            </div>
+                <p className="text-gray-300 mb-3">
+                  {Number(policy.currentSupply)} / {Number(policy.totalSupply)}
+                </p>
+              </div>
 
-            <Button
-              onClick={() => {
-                if (allowance >= BigInt(100_000)) {
-                  handleBuyPolicy(policy.id, policy.premium);
-                } else {
-                  handleApprove();
-                }
-              }}
-              className="cursor-pointer"
-            >
-              {allowance >= BigInt(100_000)
-                ? `Buy @ ${formatEther(policy.premium)} USDT`
-                : "Approve Token"}
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
+              <Button
+                onClick={() => {
+                  if (allowance >= BigInt(100_000)) {
+                    handleBuyPolicy(policy.id, policy.premium);
+                  } else {
+                    handleApprove();
+                  }
+                }}
+                className="cursor-pointer"
+              >
+                {allowance >= BigInt(100_000)
+                  ? `Buy @ ${formatEther(policy.premium)} USDT`
+                  : "Approve Token"}
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
     </div>
   );
 }

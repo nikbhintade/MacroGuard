@@ -165,13 +165,16 @@ export default function YourPolicies() {
                 {policy.isHigher ? "or Higher" : "or Lower"}
               </CardTitle>
 
-              <CardDescription className="text-sm text-gray-300 mb-1">
+              <CardDescription className="text-sm text-gray-100 mb-1">
                 By {policy.provider.slice(0, 5)}....{policy.provider.slice(-5)}
               </CardDescription>
 
-              <p className="text-gray-300 mb-3">
+              <p className="text-sm text-gray-100 mb-1">
                 You own: {balances[index]?.toString() ?? "0"}{" "}
                 {balances[index] > 1 ? "policies" : "policy"}
+              </p>
+              <p className="text-sm text-gray-100 mb-3">
+                Policy ID: {policy.id}
               </p>
             </div>
 
