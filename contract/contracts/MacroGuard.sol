@@ -11,7 +11,6 @@ import {ERC1155} from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 struct DataTransportObject {
     string indicator;
-    uint256 timestamp;
     uint256 value;
 }
 
@@ -32,16 +31,16 @@ contract MacroGuard is IMacroGuard, ERC1155 {
 
     function createPolicy(
         uint256 premium,
-        uint256 noOfPolicies,
+        uint256 noOfPolicies,//
         uint256 coverage,
-        uint256 strikePrice,
-        uint256 startDate,
-        uint256 period,
-        bool isHigher,
-        string calldata indicator
+        uint256 strikePrice,//
+        uint256 startDate,//
+        uint256 period,//
+        bool isHigher,//
+        string calldata indicator //
     ) external returns (uint256) {
         require(bytes(indicator).length > 0, "indicator is empty");
-        require(indicatorsValues[indicator] != 0, "indicator not available");
+        // require(indicatorsValues[indicator] != 0, "indicator not available");
 
         require(premium > 0, "premium must be > 0");
         require(noOfPolicies > 0, "noOfPolicies must be > 0");
@@ -187,5 +186,25 @@ contract MacroGuard is IMacroGuard, ERC1155 {
 
     function getIndicatorValue(string calldata indicator) external view returns (uint256) {
         return indicatorsValues[indicator];
+    }
+
+    function getTokensOfUser(address user) external view returns (uint256[] memory) {
+        uint256[] memory ownedTokenIds = new uint256[](s_currentPolicyId);
+        uint256 count = 0;
+
+        for (uint256 i = 0; i < s_currentPolicyId; i++) {
+            if (balanceOf(user, i) > 0) {
+                ownedTokenIds[count] = i;
+                count++;
+            }
+        }
+
+        // Resize the array to fit the number of owned token IDs
+        uint256[] memory result = new uint256[](count);
+        for (uint256 i = 0; i < count; i++) {
+            result[i] = ownedTokenIds[i];
+        }
+
+        return result;
     }
 }

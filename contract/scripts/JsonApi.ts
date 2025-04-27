@@ -1,30 +1,10 @@
-import { run, web3 } from "hardhat";
 import { StarWarsCharacterListInstance } from "../../typechain-types";
-import {
-  prepareAttestationRequestBase,
-  submitAttestationRequest,
-  retrieveDataAndProofBase,
-} from "./Base";
+
 
 const StarWarsCharacterList = artifacts.require("StarWarsCharacterList");
 
-const {
-  JQ_VERIFIER_URL_TESTNET,
-  JQ_VERIFIER_API_KEY_TESTNET,
-  COSTON2_DA_LAYER_URL,
-} = process.env;
 
-// yarn hardhat run scripts/fdcExample/JsonApi.ts --network coston2
 
-// Request data
-const apiUrl = "https://swapi.dev/api/people/3/";
-const postprocessJq = `{name: .name, height: .height, mass: .mass, numberOfFilms: .films | length, uid: (.url | split("/") | .[-2] | tonumber)}`;
-const abiSignature = `{"components": [{"internalType": "string", "name": "name", "type": "string"},{"internalType": "uint256", "name": "height", "type": "uint256"},{"internalType": "uint256", "name": "mass", "type": "uint256"},{"internalType": "uint256", "name": "numberOfFilms", "type": "uint256"},{"internalType": "uint256", "name": "uid", "type": "uint256"}],"name": "task","type": "tuple"}`;
-
-// Configuration constants
-const attestationTypeBase = "IJsonApi";
-const sourceIdBase = "WEB2";
-const verifierUrlBase = JQ_VERIFIER_URL_TESTNET;
 
 async function prepareAttestationRequest(
   apiUrl: string,
@@ -58,21 +38,7 @@ async function retrieveDataAndProof(
   return await retrieveDataAndProofBase(url, abiEncodedRequest, roundId);
 }
 
-async function deployAndVerifyContract() {
-  const args: any[] = [];
-  const characterList: StarWarsCharacterListInstance =
-    await StarWarsCharacterList.new(...args);
-  try {
-    await run("verify:verify", {
-      address: characterList.address,
-      constructorArguments: args,
-    });
-  } catch (e: any) {
-    console.log(e);
-  }
-  console.log("StarWarsCharacterList deployed to", characterList.address, "\n");
-  return characterList;
-}
+
 
 async function interactWithContract(
   characterList: StarWarsCharacterListInstance,

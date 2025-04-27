@@ -4,7 +4,7 @@ import {
   IFlareSystemsManagerInstance,
   IFdcRequestFeeConfigurationsInstance,
   IRelayInstance,
-} from "../../typechain-types";
+} from "../typechain-types";
 
 const Helpers = artifacts.require("Helpers");
 const FdcHub = artifacts.require("IFdcHub");
