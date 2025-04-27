@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Redeem",
+    "buttonLink": "/card/1"
+  },
+  {
+    "id": 2,
+    "image": "/image.png",
+    "title": "CPI @4.5%",
+    "subtitle": "By: 0x345...343",
+    "description": "Policies: 100/200",
+    "buttonText": "Redeem",
+    "buttonLink": "/card/2"
+  }
+]
