@@ -52,7 +52,7 @@ export default function Header() {
       </div>
 
       {/* Right: Connect Wallet */}
-      <div className="w-12">
+      <div >
         <ConnectWallet />
       </div>
     </div>
